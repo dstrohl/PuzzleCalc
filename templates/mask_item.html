@@ -1,0 +1,38 @@
+<td>
+    <div class="{% if val != "." and has_options %}collapse collapse-unselected{% endif %}">
+        <input type="radio"
+               class="btn-check row{{ row_num }} unk-btn"
+               name="l{{ row_num }}m{{ col_num }}"
+               id="unk-button{{ row_num }}-{{ col_num }}"
+               autocomplete="off"
+               {% if val == "." %}checked{% endif %}
+               value=".">
+        <label class="btn btn-outline-primary" for="unk-button{{ row_num }}-{{ col_num }}">
+            {% include "val_icon.html" with val_icon="." %}
+        </label>
+    </div>
+    <div class="{% if val != "1" and has_options %}collapse collapse-unselected{% endif %}">
+        <input type="radio"
+               class="btn-check row{{ row_num }} filled-btn"
+               name="l{{ row_num }}m{{ col_num }}"
+               id="filled-button{{ row_num }}-{{ col_num }}"
+               autocomplete="off"
+               {% if val == "1" %}checked{% endif %}
+               value="1">
+        <label class="btn btn-outline-success" for="filled-button{{ row_num }}-{{ col_num }}">
+            {% include "val_icon.html" with val_icon="1" %}
+        </label>
+    </div>
+    <div class="{% if val != "0" and has_options %}collapse collapse-unselected{% endif %}">
+        <input type="radio"
+               class="btn-check row{{ row_num }} skipped-btn"
+               name="l{{ row_num }}m{{ col_num }}"
+               id="skipped-button{{ row_num }}-{{ col_num }}"
+               autocomplete="off"
+               {% if val == "0" %}checked{% endif %}
+               value="0">
+        <label class="btn btn-outline-danger" for="skipped-button{{ row_num }}-{{ col_num }}">
+            {% include "val_icon.html" with val_icon="0" %}
+        </label>
+    </div>
+</td>

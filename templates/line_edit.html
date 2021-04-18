@@ -1,0 +1,56 @@
+{% extends "pc_base.html" %}
+{% block content %}
+<form>
+<input type="submit">
+<table>
+    <thead>
+        <th>elements</th>
+        {% for c in length_range %}
+            <th>{{ c }}</th>
+        {% endfor %}
+    </thead>
+    <tr>
+        <td><input type="text" name="elements"></td>
+        {% for c in length_range %}
+            <td>
+                <div>
+                <input type="radio" class="btn-check" name="l1m{{ c }}" id="success-outlined{{ c }}" autocomplete="off" checked value=".">
+                <label class="btn btn-outline-success" for="success-outlined{{ c }}">?</label>
+                </div>
+                <div>
+                <input type="radio" class="btn-check" name="l1m{{ c }}" id="danger-outlined{{ c }}" autocomplete="off" value="1">
+                <label class="btn btn-outline-danger" for="danger-outlined{{ c }}">1</label>
+                </div>
+
+                <div>
+                <input type="radio" class="btn-check" name="l1m{{ c }}" id="blue-outlined{{ c }}" autocomplete="off" value="0">
+                <label class="btn btn-outline-primary" for="blue-outlined{{ c }}">0</label>
+                </div>
+            </td>
+
+        {% endfor %}
+
+    </tr>
+</table>
+</form>
+
+{% endblock %}
+
+{% block endscriots %}
+    <script>
+
+        $(function() {
+            $('.tristate').tristate({
+                change: function (state, value) {
+                    console.log('Input:', this);
+                    console.log('value:', value);
+                    console.log('Unknown?', state === null);
+                    console.log('Known?', state !== null);
+                    console.log('Checked?', state === true);
+                    console.log('Unhecked?', state === false);
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

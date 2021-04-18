@@ -1,0 +1,40 @@
+<tr class="">
+    <td rowspan="{{ option_count|add:"1" }}">Row {{ row_num|add:"1" }}</td>
+    <td>
+        <span>Elements</span>
+        <input type="tel" class="element-input" inputmode="tel" name="l{{ row_num }}" value="{{ line.elements|join:", " }}" size="12">
+    </td>
+    <td class="bg-info">
+        <div class="{% if has_options %}collapse collapse-unselected{% endif %}">
+            <div>
+                <button class="btn btn-outline-primary btn-set-mask btn-set-unk" type="button" data-row="row{{ row_num }}" data-btn-type="unk-btn" id="set-unk-{{ row_num }}">
+                    {% include "val_icon.html" with val_icon='.' %}
+                </button>
+            </div>
+            <div>
+                <button class="btn btn-outline-success btn-set-mask" type="button" data-row="row{{ row_num }}" data-btn-type="filled-btn"  id="set-filled-{{ row_num }}">
+                    {% include "val_icon.html" with val_icon='1' %}
+                </button>
+            </div>
+            <div>
+                <button class="btn btn-outline-danger btn-set-mask" type="button" data-row="row{{ row_num }}" data-btn-type="skipped-btn"  id="set-skipped-{{ row_num }}">
+                    {% include "val_icon.html" with val_icon='0' %}
+                </button>
+            </div>
+
+        </div>
+    </td>
+
+    {% for val in line.line_mask %}
+        {% include "mask_item.html" with col_num=forloop.counter0 %}
+    {% endfor %}
+</tr>
+
+{% for row in line.filtered_data %}
+    <tr scope="row" class="table-dark collapse options-list" id="collapse-list-id{{ row_num }}">
+        <td scope="col">Option {{ forloop.counter }}</td>
+        {% for val in row %}
+            <td scope="col">{% include "val_icon.html" with val_icon=val %}</td>
+        {% endfor %}
+    </tr>
+{% endfor %}

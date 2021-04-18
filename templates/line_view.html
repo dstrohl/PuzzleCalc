@@ -1,0 +1,33 @@
+{% extends "pc_base.html" %}
+{% block content %}
+
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".options-list3" aria-expanded="false"> {# aria-controls="options-list-id">#}
+        Show Options
+    </button>
+
+    <table class="table table-sm table-bordered text-center">
+        <thead>
+            <tr>
+                {% for c in line.header %}
+                    <th scope="col">{{ c }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tr class="">
+            <td>Mask {{ elements }}</td>
+            {% for f in line.line_mask %}
+                <td scope="col">{{ f }}</td>
+            {% endfor %}
+        </tr>
+
+        {% for row in line.filtered_data %}
+            <tr scope="row" class="table-dark collapse options-list3" id="collapse-list-id">
+                <td scope="col">Line {{ forloop.counter }}</td>
+                {% for col in row %}
+                    <td scope="col">{{ col }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}

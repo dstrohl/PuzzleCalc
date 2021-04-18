@@ -1,0 +1,38 @@
+{% extends "pc_base.html" %}
+{% block content %}
+    <form>
+
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".options-list" aria-expanded="false"> {# aria-controls="options-list-id">#}
+            Show Options
+        </button>
+
+        {% if has_options %}
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".collapse-unselected" aria-expanded="false"> {# aria-controls="options-list-id">#}
+                Change Mask
+            </button>
+        {% endif %}
+
+        <button class="btn btn-primary" type="submit">(re)Calculate</button>
+        Line Length <input type="number" name="line_length" size="4" value="{{ line_length }}">
+        Row Count <input type="number" name="row_count" size="4" value="{{ row_count }}">
+
+        <button class="btn btn-primary btn-clear-all" type="button">
+            Clear All
+        </button>
+
+        <table class="text-center">
+            <thead>
+                <tr>
+                    <th></th><th></th><th>Set All</th>
+                    {% for c in length_range %}
+                        <th scope="col">{{ c|add:"1" }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            {% for line in lines %}
+                {% include "pc_line.html" with row_num=forloop.counter0 %}
+            {% endfor %}
+        </table>
+    </form>
+
+{% endblock %}
